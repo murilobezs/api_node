@@ -9,6 +9,37 @@ app.use(express.json());
 
 
 // Criando uma nova rota
+
+//Método PUT para atualizar um usuário existente
+app.put('/usuarios/:id', async (req, res) => {
+    //console.log(req.params.id);
+
+    await prisma.usuario.update({
+        where: {
+            id: req.params.id
+        },
+        data: {
+            email: req.body.email,
+            nome: req.body.nome,
+            idade: req.body.idade
+        }
+    });
+
+    res.status(201).json({message: "Usuário atualizado com sucesso!"});
+});
+
+//Método DELETE para deletar um usuário existente
+app.delete('/usuarios/:id', async (req, res) => {
+    await prisma.usuario.delete({
+        where: {
+            id: req.params.id
+        }
+    });
+
+    res.status(200).json({message: "Usuário deletado com sucesso!"});
+});
+
+//Método POST para criar um novo usuário
 app.post('/usuarios', async (req, res) => {
     await prisma.usuario.create({
         data: {
