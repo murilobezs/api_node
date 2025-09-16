@@ -23,7 +23,7 @@ app.put('/usuarios/:id', async (req, res) => {
         data: {
             email: req.body.email,
             nome: req.body.nome,
-            idade: req.body.idade
+            idade: String(req.body.idade) // Gambiarra: converte int para string
         }
     });
 
@@ -47,7 +47,7 @@ app.post('/usuarios', async (req, res) => {
         data: {
             email: req.body.email,
             nome: req.body.nome,
-            idade: req.body.idade
+            idade: String(req.body.idade) // Gambiarra: converte int para string
         }
     });
 
